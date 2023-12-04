@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# react custom hook
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# react children
 
-## Available Scripts
+# react hook
 
-In the project directory, you can run:
+    - react useMemo
+    - react useContext
+    - react useCallback
+    - react useReducer
 
-### `npm start`
+# react custom hook
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- react로 개발을 할때 자주 사용하는 기능을 hook으로 작성해서 정리 해놓고 재사용성으 높히자.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# React useMemo
 
-### `npm test`
+- useMemo 리액트의 컴포넌트의 성능을 최적화 시키자.
+- 메모이제이션 Memo가 뜻하는것. 동일한 연산을 반복해야할 경우 이전에 연산한 값을 메모리에 저장해놓고 동일한 연산이 반복되면
+  연산을 다시 하지 않고 값을 참조하는 내용.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 부모 컴포넌트가 리렌더링되면 자식 컴포넌트들이 모두 리렌더링이 되어버려서
+- 불필요한 연산을 줄이자. 부모만 상태변수가 변했으면 자식이 리렌더링 될 필요가 없다
+- 게시판을 예) 아이템이 100개의 컴포넌트
 
-### `npm run build`
+# react useContext
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 공식문서에서 context를 사용하면 props를 전달 하지 않아도 된다. 전역 상태 변수를 사용할 수 있다.
+- 전역 상태
+- 부모 -> 자식 -> 자식 -> 자식
+- 객체인데 참조를 부모에서 주입시켜준 자식들을 어디서든 접근이 가능하다 편하게 사용가능
+- createCountext로 context객체를 만드고
+- Provider : context 객체를 하위 저식 컴포넌트들에세 값을 전달해주는 역활을 한다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# react useReducer
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- useState를 대체할수 있는 hook함수
+- 여러개의 상태를 구분지어서 사용하기가 편하다. 가독성 업!
+- 비동기처리도 가독성이 좋다.
 
-### `npm run eject`
+1. state
+   - 사용할 상태
+2. dispatch
+   - reducer 함수 (메뉴판) 함수를 실행시킨다. (전달한 문자열을 보고 어떤 메뉴시켰니?)
+   - 현재 state, action 객체를 받아서 action 객체의 내용은 전달할 매개변수 업데이트를 할때 실행시킨다.
+3. initialState
+   - 초기값을 전달(object 객체)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- reducer는 이전의 상태와 action객체의 내용을 합쳐서 {...state, {id : action.payload.id}}
+- useState를 사용할때보다 더 복잡한 프로세스를 가족성이 좋게 처리할 수 있다.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```js
+// type : 어떤 case 문을 실행시킬건지.
+// payload : 상태를 업데이트할때 필요한 매개변수를 객체로 전달하고
+<button onClick={() => dispatch({ type: "김치볶음밥", payload })} />
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# useReducer 가게 모양만 틀을 잡아놓고 reduser 함수를 만들어서 전달 (메뉴판) dispatch 함수 (손님이 주문을 넣음)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```js
+const reducer = (state, action) => {
+  // state : 현재 상태를 매개변수로 받고
+  // action = { type: "김치볶음밥", payload };
+  // 상태가 전환 된다는 얘기는 새로운 주소가 들어왔을때
+  // 값만 변했다고 이게 변한거임? 얘는 바보다.
+  // 주소가 다른 새로운 객체를 반환해야 상태가 변했다고 알아들음.
+  const {type, payload} = action
+  switch (type) {
+    case "김치볶음밥":
+      return { id: state.id + payload.id };
+      default : {...state}
+  }
+};
+```

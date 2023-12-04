@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import { Memo } from "./Memo/Memo";
+import Login from "./components/page/Login";
+import { Context } from "./Context/Context";
+import { CallBack } from "./Callback/Callback";
+import { Reducer } from "./Reducer/Reducer";
 
 function App() {
+  const [temp, setTemp] = useState(0);
+  const onClickHandler = () => {
+    setTemp(temp + 1);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Login></Login>
+      <Memo></Memo>
+      <button onClick={onClickHandler}>버튼</button>
+      <Context></Context>
+      <CallBack></CallBack>
+      <Reducer></Reducer>
     </div>
   );
 }
